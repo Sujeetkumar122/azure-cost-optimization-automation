@@ -1,0 +1,16 @@
+version: 0.1
+
+# Infracost PR budget check policy
+currency: USD
+
+# Guardrails enforcing cost checks before merge
+guardrails:
+  - name: Standalone Monthly Cost Increase
+    description: Warn if monthly cost delta exceeds $500
+    condition: diff_monthly_cost > 500
+    action: comment
+
+  - name: Critical Monthly Cost Threshold
+    description: Block PR if monthly cost increase exceeds $2000
+    condition: diff_monthly_cost > 2000
+    action: block
